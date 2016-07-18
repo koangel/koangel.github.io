@@ -1,313 +1,365 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>PY编写的BOOST自动编译程序 | 游戏日常点滴</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="K.O Angel">
-    
-    <meta name="description" content="使用Python编写的BOOST程序">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>PY编写的BOOST自动编译程序 | 游戏日常点滴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Python编写的BOOST程序引子编写此程序的缘由在于可以不用一直切换VS的环境，并且可以自动编译64位或32位程序，更加傻瓜的方式，后期我可能会写一个UI程序，这样点选即可。
+Python写的Boost自动编译程序 Version:1.1
+改进：
+根据自己的环境筛选出已安装环境，并列出 环境提供选择。支持X64位的自动参数编译。可以选择编译的参数，其他版本持续改进中自动编译自动安装到指定目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PY编写的BOOST自动编译程序">
+<meta property="og:url" content="http://koangel.github.io/2016/07/18/PY编写的BOOST自动编译脚本/index.html">
+<meta property="og:site_name" content="游戏日常点滴">
+<meta property="og:description" content="使用Python编写的BOOST程序引子编写此程序的缘由在于可以不用一直切换VS的环境，并且可以自动编译64位或32位程序，更加傻瓜的方式，后期我可能会写一个UI程序，这样点选即可。
+Python写的Boost自动编译程序 Version:1.1
+改进：
+根据自己的环境筛选出已安装环境，并列出 环境提供选择。支持X64位的自动参数编译。可以选择编译的参数，其他版本持续改进中自动编译自动安装到指定目">
+<meta property="og:updated_time" content="2016-07-18T13:55:26.831Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PY编写的BOOST自动编译程序">
+<meta name="twitter:description" content="使用Python编写的BOOST程序引子编写此程序的缘由在于可以不用一直切换VS的环境，并且可以自动编译64位或32位程序，更加傻瓜的方式，后期我可能会写一个UI程序，这样点选即可。
+Python写的Boost自动编译程序 Version:1.1
+改进：
+根据自己的环境筛选出已安装环境，并列出 环境提供选择。支持X64位的自动参数编译。可以选择编译的参数，其他版本持续改进中自动编译自动安装到指定目">
+  
+    <link rel="alternative" href="/atom.xml" title="游戏日常点滴" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="游戏日常点滴" title="游戏日常点滴"/></a>
-			</div>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
 			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="游戏日常点滴">游戏日常点滴</a></h1>
-				<h2 class="blog-motto">写自己的游戏让别人玩去吧</h2>
+			<img lazy-src="img/userAvatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">K.O Angel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:koangel.github.io">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
+		
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/18/PY编写的BOOST自动编译脚本/" title="PY编写的BOOST自动编译程序" itemprop="url">PY编写的BOOST自动编译程序</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://koangel.github.io" title="K.O Angel">K.O Angel</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2016-07-18T05:29:45.000Z" itemprop="datePublished">2016-07-18</time>
-    更新日期:<time datetime="2016-07-18T05:32:32.777Z" itemprop="dateModified">2016-07-18</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Python编写的BOOST程序"><span class="toc-number">1.</span> <span class="toc-text">使用Python编写的BOOST程序</span></a></li></ol>
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/cpp/" style="font-size: 10px;">cpp</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">从事十多年游戏研发，目前担任制作人以及CTO</div>
+				</section>
+				
+			</div>
 		</div>
-		
-		<h2 id="使用Python编写的BOOST程序"><a href="#使用Python编写的BOOST程序" class="headerlink" title="使用Python编写的BOOST程序"></a>使用Python编写的BOOST程序</h2><hr>
-  
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">K.O Angel</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="img/userAvatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">K.O Angel</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
 	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/cpp/">cpp</a>
-  </div>
-
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://koangel.github.io/2016/07/18/PY编写的BOOST自动编译脚本/" data-title="PY编写的BOOST自动编译程序 | 游戏日常点滴" data-tsina="1457165387" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
-
-<div class="next">
-<a href="/2016/07/18/switach_hexo/"  title="正式切入GITHUB">
- <strong>NEXT:</strong><br/> 
- <span>正式切入GITHUB
-</span>
-</a>
-</div>
-
 </nav>
 
-	
-<section class="comment">
-	<div class="ds-thread"></div>
-</section>
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Python编写的BOOST程序"><span class="toc-number">1.</span> <span class="toc-text">使用Python编写的BOOST程序</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
+      <div class="body-wrap"><article id="post-PY编写的BOOST自动编译脚本" class="article article-type-post" itemscope itemprop="blogPost">
   
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/cpp/" title="cpp">cpp<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+    <div class="article-meta">
+      <a href="/2016/07/18/PY编写的BOOST自动编译脚本/" class="article-date">
+  	<time datetime="2016-07-18T05:29:45.000Z" itemprop="datePublished">2016-07-18</time>
+</a>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		<a href="http://weibo.com/koangel" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/koangel" target="_blank" title="github"></a>
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
-		
-		<a href="http://koangel.github.io" target="_blank" title="K.O Angel">K.O Angel</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
+  
+    <h1 class="article-title" itemprop="name">
+      PY编写的BOOST自动编译程序
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用Python编写的BOOST程序"><a href="#使用Python编写的BOOST程序" class="headerlink" title="使用Python编写的BOOST程序"></a>使用Python编写的BOOST程序</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><pre><code>编写此程序的缘由在于可以不用一直切换VS的环境，并且可以自动编译64位或32位程序，更加傻瓜的方式，后期我可能会写一个UI程序，这样点选即可。
+</code></pre><p><strong>Python</strong>写的<strong>Boost自动编译程序</strong> Version:1.1</p>
+<p>改进：</p>
+<p>根据自己的环境筛选出已安装环境，并列出 环境提供选择。<br>支持X64位的自动参数编译。<br>可以选择编译的参数，其他版本持续改进中<br>自动编译自动安装到指定目录（需要自己改PY代码）<br>有需要改进的请继续，自行修改，修改请保留作者版权。<br>已测试过 WIN10下自动编译B2和编译VS2010版BOOST 1.61<br>目前仅支持VS2010以及未来版本，仅支持BOOST 1.53以上版本</p>
+<h3 id="源码干货"><a href="#源码干货" class="headerlink" title="源码干货"></a>源码干货</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Code by koangel</span></div><div class="line"><span class="comment"># EMail: jackliu100@gmail.com</span></div><div class="line"><span class="comment"># version : 1.1 beta</span></div><div class="line"><span class="comment"># boost 全自动编译工具，仅用于WIN32编译 #</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="keyword">import</span> signal</div><div class="line"><span class="keyword">import</span> platform</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">reload(sys)</div><div class="line"></div><div class="line"><span class="comment"># 全局变量设置 #</span></div><div class="line"><span class="comment"># boost的源码路径</span></div><div class="line">boost_work_path = <span class="string">"E:/boost/boost_1_61_0"</span></div><div class="line"></div><div class="line"><span class="comment"># build log文件名</span></div><div class="line">build_log_file_name     = <span class="string">"build_log.txt"</span></div><div class="line"></div><div class="line"><span class="comment"># 启动环境变量输出</span></div><div class="line">is_write_evn_log    = <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="comment"># 原始目录</span></div><div class="line">temp_old_path = <span class="string">""</span></div><div class="line"></div><div class="line">ISOTIMEFORMAT=<span class="string">'%Y-%m-%d %X'</span></div><div class="line"><span class="comment"># vc环境</span></div><div class="line">g_vs_env_data = [</div><div class="line">    <span class="comment"># env , vc ver</span></div><div class="line">    [<span class="string">"VS100COMNTOOLS"</span>,<span class="string">"VC100"</span>,<span class="string">"Visual Studio 2010"</span>,<span class="keyword">False</span>,<span class="string">"Microsoft Visual Studio 10.0"</span>,<span class="string">"10.0"</span>],</div><div class="line">    [<span class="string">"VS110COMNTOOLS"</span>,<span class="string">"VC110"</span>,<span class="string">"Visual Studio 2012"</span>,<span class="keyword">False</span>,<span class="string">"Microsoft Visual Studio 11.0"</span>,<span class="string">"11.0"</span>],</div><div class="line">    [<span class="string">"VS120COMNTOOLS"</span>,<span class="string">"VC120"</span>,<span class="string">"Visual Studio 2013"</span>,<span class="keyword">False</span>,<span class="string">"Microsoft Visual Studio 12.0"</span>,<span class="string">"12.0"</span>],</div><div class="line">    [<span class="string">"VS140COMNTOOLS"</span>,<span class="string">"VC140"</span>,<span class="string">"Visual Studio 2015"</span>,<span class="keyword">False</span>,<span class="string">"Microsoft Visual Studio 14.0"</span>,<span class="string">"14.0"</span>],</div><div class="line">    [<span class="string">"VS150COMNTOOLS"</span>,<span class="string">"VC150"</span>,<span class="string">"Visual Studio 2016"</span>,<span class="keyword">False</span>,<span class="string">"Microsoft Visual Studio 15.0"</span>,<span class="string">"15.0"</span>],</div><div class="line">]</div><div class="line"></div><div class="line">vaild_vs_num = <span class="number">0</span></div><div class="line"></div><div class="line">VERSION_KEY = <span class="string">'VISUALSTUDIOVERSION'</span></div><div class="line"></div><div class="line"><span class="comment"># boost编译选项 ，请在此处调整</span></div><div class="line"><span class="comment"># 输出目录</span></div><div class="line">build_install_path = <span class="string">"E:/boost/boost_1_61_0"</span></div><div class="line"><span class="comment"># 构建32位还是64位</span></div><div class="line">build_is_x64    = <span class="keyword">True</span></div><div class="line"><span class="comment"># 线程模式(不建议修改 ，保持默认)</span></div><div class="line">build_threading_link = <span class="string">"multi"</span></div><div class="line"><span class="comment"># 链接模式</span></div><div class="line">build_is_shared_link = <span class="keyword">False</span></div><div class="line"><span class="comment"># 运行库链接模式</span></div><div class="line">build_is_shared_runtime = <span class="keyword">False</span></div><div class="line"><span class="comment"># 编译模式(不建议调试)</span></div><div class="line">build_variant = <span class="string">"debug,release"</span></div><div class="line"><span class="comment"># 某些特殊编译模式</span></div><div class="line">build_is_with_python = <span class="keyword">False</span></div><div class="line">build_is_with_MPI = <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLogPath</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> boost_work_path + <span class="string">"/"</span> + build_log_file_name</div><div class="line"></div><div class="line"><span class="comment"># 写出函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logtofile</span><span class="params">(str)</span>:</span></div><div class="line">    type = sys.getfilesystemencoding()</div><div class="line">    timeStr = time.strftime(ISOTIMEFORMAT,time.localtime(time.time()))</div><div class="line">    print(<span class="string">"["</span>+ timeStr + <span class="string">"] "</span> +str.decode(<span class="string">'utf-8'</span>).encode(type))</div><div class="line">    os.system(<span class="string">"echo "</span> + <span class="string">"["</span>+ timeStr + <span class="string">"] "</span> + str.decode(<span class="string">'utf-8'</span>).encode(type) + <span class="string">" &gt;&gt; "</span> + getLogPath())</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_b2_tools</span><span class="params">( toPath )</span>:</span></div><div class="line">    logtofile(<span class="string">"正在构建B2工具集，请耐心等待...."</span>)</div><div class="line">    os.system(toPath + <span class="string">" &amp; bootstrap.bat &gt;&gt; "</span> + getLogPath() )</div><div class="line">    logtofile(<span class="string">"构建B2工具集完成..."</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_compiler_env</span><span class="params">()</span> :</span> </div><div class="line">    logtofile(<span class="string">"开始检测VS环境是否有效..."</span>)</div><div class="line">    isFindVC = <span class="keyword">False</span></div><div class="line">    vaild_vs_num = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> vi <span class="keyword">in</span> g_vs_env_data:</div><div class="line">        <span class="keyword">if</span> os.environ.has_key(vi[<span class="number">0</span>]) :</div><div class="line">            logtofile(<span class="string">"     环境:"</span> + vi[<span class="number">2</span>] + <span class="string">" 有效..."</span>)</div><div class="line">            vi[<span class="number">3</span>] = <span class="keyword">True</span></div><div class="line">            vaild_vs_num = vaild_vs_num+<span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            logtofile(<span class="string">"     环境:"</span> +vi[<span class="number">2</span>] + <span class="string">" 无效..."</span>)</div><div class="line">            isFindVC = <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> isFindVC</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_env_data</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> is_write_evn_log :</div><div class="line">        logtofile(<span class="string">"输出全部环境变量:"</span>)</div><div class="line">        <span class="keyword">for</span> ev <span class="keyword">in</span> os.environ.data:</div><div class="line">            logtofile(<span class="string">"环境变量:"</span> + str(ev) + <span class="string">" data:"</span> + os.environ[ev])</div><div class="line">            </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">"==========================================================================="</span>)</div><div class="line">    print(<span class="string">" Boost Auto Build Tools for Windows Version 1.1 beta"</span>)</div><div class="line">    print(<span class="string">" Code by Koangel , Using Python 2.7 "</span>)</div><div class="line">    print(<span class="string">" weibo: http:\\www.weibo.com/koangel"</span>)</div><div class="line">    print(<span class="string">" Visual Studio for vs2010 or newer "</span>)</div><div class="line">    print(<span class="string">" Boost for boost 1.53 or newer "</span>)</div><div class="line">    print(<span class="string">"==========================================================================="</span>)</div><div class="line"></div><div class="line">    sys.setdefaultencoding(<span class="string">'gbk'</span>)</div><div class="line">    <span class="comment">#os.remove(getLogPath())</span></div><div class="line">    logtofile(<span class="string">"检测是否为WINDOWS..."</span>)</div><div class="line">    <span class="keyword">if</span> (os.name != <span class="string">'nt'</span>):</div><div class="line">        logtofile(<span class="string">"非WINDOWS环境，无法运行..."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    write_env_data()</div><div class="line"></div><div class="line">    <span class="comment"># 检查编译环境</span></div><div class="line">    logtofile(<span class="string">"检测是否安装VS环境...."</span>)</div><div class="line">    <span class="keyword">if</span> (check_compiler_env() == <span class="keyword">False</span>) :</div><div class="line">        logtofile(<span class="string">"未安装VS环境无法继续..."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    logtofile(<span class="string">"请选择X86 or X64:( 1、x86 2、x64 )..."</span>)</div><div class="line">    addrMode = int(raw_input(<span class="string">"Select:"</span>))</div><div class="line">    <span class="keyword">if</span> addrMode == <span class="string">'1'</span> <span class="keyword">or</span> addrMode == <span class="number">1</span>:</div><div class="line">        build_is_x64 = <span class="keyword">False</span></div><div class="line">    <span class="keyword">elif</span> addrMode == <span class="string">'2'</span> <span class="keyword">or</span> addrMode == <span class="number">2</span>:</div><div class="line">        build_is_x64 = <span class="keyword">True</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        logtofile(<span class="string">"选择错误，请重新运行..."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    logtofile(<span class="string">"请选择Runtime模式:( 1、Shared Runtime 2、Static Runtime )..."</span>)</div><div class="line">    smode = int(raw_input(<span class="string">"Select:"</span>))</div><div class="line">    <span class="keyword">if</span> smode == <span class="number">1</span>:</div><div class="line">        build_is_shared_runtime = <span class="keyword">True</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        build_is_shared_runtime = <span class="keyword">False</span></div><div class="line"></div><div class="line">    logtofile(<span class="string">"请选择Link模式:( 1、Shared 2、Static )..."</span>)</div><div class="line">    smode = int(raw_input(<span class="string">"Select:"</span>))</div><div class="line">    <span class="keyword">if</span> smode == <span class="number">1</span>:</div><div class="line">        build_is_shared_link = <span class="keyword">True</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        build_is_shared_link = <span class="keyword">False</span></div><div class="line"></div><div class="line">    nVSIDX = <span class="number">1</span></div><div class="line">    logtofile(<span class="string">"请选择一个您需要的编译器版本："</span>)</div><div class="line">    </div><div class="line">    gvslist = []</div><div class="line">    <span class="keyword">for</span> vevi <span class="keyword">in</span> g_vs_env_data:</div><div class="line">        <span class="keyword">if</span> vevi[<span class="number">3</span>] :</div><div class="line">            logtofile(<span class="string">" "</span> + str(nVSIDX) + <span class="string">"、"</span> + vevi[<span class="number">4</span>] + <span class="string">"。"</span>)</div><div class="line">            gvslist.append(vevi)</div><div class="line">            nVSIDX += <span class="number">1</span></div><div class="line"></div><div class="line">    vsSel = int(raw_input(<span class="string">"Select:"</span>))</div><div class="line">    <span class="keyword">if</span> vsSel &lt; <span class="number">0</span> <span class="keyword">or</span> vsSel &gt; len(gvslist):</div><div class="line">        logtofile(<span class="string">"无效的选项，超出选项索引..."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="comment"># 运行关键内容</span></div><div class="line">    targetVSEnv = gvslist[vsSel<span class="number">-1</span>]</div><div class="line">    logtofile(<span class="string">"选择编译环境:"</span> + targetVSEnv[<span class="number">4</span>])</div><div class="line"></div><div class="line">    toPath =  <span class="string">'call \"'</span>+os.environ[targetVSEnv[<span class="number">0</span>]] + <span class="string">'..\\..\\VC\\vcvarsall.bat\"'</span></div><div class="line">    </div><div class="line">    <span class="keyword">if</span> build_is_x64:</div><div class="line">        toPath += <span class="string">" x86_amd64"</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        toPath += <span class="string">" x86"</span></div><div class="line">    </div><div class="line">    <span class="comment">#os.system(toPath)</span></div><div class="line"></div><div class="line">    temp_old_path = os.path</div><div class="line">    <span class="comment"># 进入BOOST目录</span></div><div class="line">    logtofile(<span class="string">"跳转进入工作目录..."</span>)</div><div class="line">    os.chdir(boost_work_path);</div><div class="line"></div><div class="line">    <span class="comment">#if (os.environ.has_key(VERSION_KEY) == False) :</span></div><div class="line">    <span class="comment">#    logtofile("未检测到VS环境，自动输出使用方法:")</span></div><div class="line">    <span class="comment">#    logtofile("    首先使用指定版本的VC工具性运行命令行，具体方法为打开，请尽量使用x86_x64兼容命令行。")</span></div><div class="line">    <span class="comment">#    logtofile("    以VS2010为例：从vs2010的工具菜单进入命令提示窗口（单击“开始”按钮，指向“所有程序”，指向“Microsoft Visual Studio 2010”，指向“Visual Studio tools(工具)”，然后单击“Visual Studio 2010 command prompt（命令提示）”")</span></div><div class="line">    <span class="comment">#    logtofile("    之后运行本Python程序即可，Coding by koangel。")</span></div><div class="line">    <span class="comment">#    return</span></div><div class="line"></div><div class="line">    toVersion = targetVSEnv[<span class="number">5</span>] <span class="comment">#str(os.environ[VERSION_KEY])</span></div><div class="line"></div><div class="line">    <span class="comment"># 写出选项</span></div><div class="line">    logtofile(<span class="string">"检测B2工具集...."</span>)</div><div class="line">    <span class="keyword">if</span> (os.access(<span class="string">"b2.exe"</span>,os.F_OK) == <span class="keyword">False</span>) :</div><div class="line">        build_b2_tools(toPath)</div><div class="line"></div><div class="line">    <span class="comment"># X86 还是 X64选项</span></div><div class="line">    cpuMode = <span class="string">"86"</span></div><div class="line">    <span class="keyword">if</span> build_is_x64:</div><div class="line">       cpuMode = <span class="string">"64"</span></div><div class="line">    </div><div class="line">    logtofile(<span class="string">"检测并构建编译命令..."</span>)</div><div class="line">    boost_cmd = <span class="string">"b2 --toolset=msvc-"</span> + toVersion.strip()</div><div class="line">    <span class="keyword">if</span> (build_is_with_python == <span class="keyword">False</span> ):</div><div class="line">        boost_cmd += <span class="string">" --without-python"</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (build_is_with_MPI == <span class="keyword">False</span> ):</div><div class="line">        boost_cmd += <span class="string">" --without-mpi"</span></div><div class="line"></div><div class="line">    boost_cmd += <span class="string">" threading="</span> + build_threading_link</div><div class="line">    boost_cmd += <span class="string">" link="</span></div><div class="line">    <span class="keyword">if</span> build_is_shared_link:</div><div class="line">         boost_cmd += <span class="string">"shared"</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        boost_cmd += <span class="string">"static"</span></div><div class="line"></div><div class="line">    boost_cmd += <span class="string">" runtime-link="</span></div><div class="line">    <span class="keyword">if</span> build_is_shared_runtime:</div><div class="line">        boost_cmd += <span class="string">"shared"</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        boost_cmd += <span class="string">"static"</span></div><div class="line"></div><div class="line">    boost_cmd += <span class="string">" variant="</span> + build_variant</div><div class="line"></div><div class="line">    <span class="keyword">if</span> build_is_x64:</div><div class="line">        boost_cmd += <span class="string">" address-model="</span>+cpuMode</div><div class="line"></div><div class="line">    boost_cmd += <span class="string">' --prefix="'</span> + build_install_path + <span class="string">'"'</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> build_is_x64 :</div><div class="line">        boost_cmd += <span class="string">' --stagedir=".\\bin\\x64"'</span></div><div class="line"></div><div class="line">    logtofile(<span class="string">"生成指令："</span> + boost_cmd)</div><div class="line"></div><div class="line">    <span class="comment"># 开始编译</span></div><div class="line">    <span class="comment">#logtofile( toPath + ' &amp; ' + boost_cmd )</span></div><div class="line">    os.system( toPath + <span class="string">' &amp; '</span> + boost_cmd ) </div><div class="line"></div><div class="line">    <span class="comment"># 生成完毕</span></div><div class="line">    logtofile(<span class="string">"生成BOOST完成，请检查是否存在具体错误。"</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 开始安装</span></div><div class="line">    logtofile(<span class="string">"开始安装BOOST..."</span>)</div><div class="line">    <span class="keyword">if</span> build_is_x64 == <span class="keyword">False</span>:</div><div class="line">        os.system(boost_cmd + <span class="string">" install"</span>)</div><div class="line">    </div><div class="line"></div><div class="line"><span class="comment"># ################################################################################</span></div><div class="line"><span class="comment"># =========================</span></div><div class="line"><span class="comment"># 入口函数</span></div><div class="line"><span class="comment"># =========================</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/18/switach_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          正式切入GITHUB,Hexo太帅了
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="PY编写的BOOST自动编译脚本" data-title="PY编写的BOOST自动编译程序" data-url="http://koangel.github.io/2016/07/18/PY编写的BOOST自动编译脚本/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 K.O Angel
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
     }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"koangel"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
-
-
-
-
-
-  </body>
+  </div>
+</body>
 </html>
