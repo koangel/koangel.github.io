@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>游戏日常点滴</title>
+  <subtitle>写自己的游戏让别人玩去吧</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://koangel.github.io/"/>
+  <updated>2016-07-18T05:32:32.777Z</updated>
+  <id>http://koangel.github.io/</id>
+  
+  <author>
+    <name>K.O Angel</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PY编写的BOOST自动编译程序</title>
+    <link href="http://koangel.github.io/2016/07/18/PY%E7%BC%96%E5%86%99%E7%9A%84BOOST%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC/"/>
+    <id>http://koangel.github.io/2016/07/18/PY编写的BOOST自动编译脚本/</id>
+    <published>2016-07-18T05:29:45.000Z</published>
+    <updated>2016-07-18T05:32:32.777Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;使用Python编写的BOOST程序&quot;&gt;&lt;a href=&quot;#使用Python编写的BOOST程序&quot; class=&quot;headerlink&quot; title=&quot;使用Python编写的BOOST程序&quot;&gt;&lt;/a&gt;使用Python编写的BOOST程序&lt;/h2&gt;&lt;hr&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;使用Python编写的BOOST程序&quot;&gt;&lt;a href=&quot;#使用Python编写的BOOST程序&quot; class=&quot;headerlink&quot; title=&quot;使用Python编写的BOOST程序&quot;&gt;&lt;/a&gt;使用Python编写的BOOST程序&lt;/h2&gt;&lt;hr&gt;
+
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://koangel.github.io/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正式切入GITHUB</title>
+    <link href="http://koangel.github.io/2016/07/18/switach_hexo/"/>
+    <id>http://koangel.github.io/2016/07/18/switach_hexo/</id>
+    <published>2016-07-18T04:54:42.558Z</published>
+    <updated>2016-07-18T05:32:21.159Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;使用HEXO搭建博客成功&quot;&gt;&lt;a href=&quot;#使用HEXO搭建博客成功&quot; class=&quot;headerlink&quot; title=&quot;使用HEXO搭建博客成功&quot;&gt;&lt;/a&gt;使用HEXO搭建博客成功&lt;/h2&gt;&lt;p&gt;第一次用HEXO编写博客，这简直太酷了&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;使用HEXO搭建博客成功&quot;&gt;&lt;a href=&quot;#使用HEXO搭建博客成功&quot; class=&quot;headerlink&quot; title=&quot;使用HEXO搭建博客成功&quot;&gt;&lt;/a&gt;使用HEXO搭建博客成功&lt;/h2&gt;&lt;p&gt;第一次用HEXO编写博客，这简直太酷了&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
