@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://koangel.github.io/"/>
-  <updated>2016-07-18T14:12:35.846Z</updated>
+  <updated>2016-07-24T15:36:22.663Z</updated>
   <id>http://koangel.github.io/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VmProtect某些版本与Hyper-V冲突</title>
+    <link href="http://koangel.github.io/2016/07/24/VmProtect%E6%9F%90%E4%BA%9B%E7%89%88%E6%9C%AC%E4%B8%8EHyper-V%E5%86%B2%E7%AA%81/"/>
+    <id>http://koangel.github.io/2016/07/24/VmProtect某些版本与Hyper-V冲突/</id>
+    <published>2016-07-24T15:20:30.000Z</published>
+    <updated>2016-07-24T15:36:22.663Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;VmProtect某些版本与Hyper-V冲突&quot;&gt;&lt;a href=&quot;#VmProtect某些版本与Hyper-V冲突&quot; class=&quot;headerlink&quot; title=&quot;VmProtect某些版本与Hyper-V冲突&quot;&gt;&lt;/a&gt;VmProtect某些版本与Hyper-V冲突&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;起因病症&quot;&gt;&lt;a href=&quot;#起因病症&quot; class=&quot;headerlink&quot; title=&quot;起因病症&quot;&gt;&lt;/a&gt;起因病症&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;今天在调试一个用&lt;code&gt;VMProtect&lt;/code&gt;加过壳的程序，发现这个壳非常神奇，怎么挂调试器都无法启动，可前几天我明明调试过他，这个太神奇。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;   总结基本病症为：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;NtDll.dll&lt;/code&gt;中函数&lt;code&gt;NtWaitForWorkViaWorkerFactory&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMProtect&lt;/code&gt;入口压缩代码以及调试器检测代码未跑完 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;发现函数跑在虚拟机或沙箱检测部分时自动异常 &lt;/p&gt;
+&lt;p&gt;所以立刻总结是VMP认为我在虚拟机或沙箱中运行导致的异常，而并未其他的加载问题之类的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;成因分析&quot;&gt;&lt;a href=&quot;#成因分析&quot; class=&quot;headerlink&quot; title=&quot;成因分析&quot;&gt;&lt;/a&gt;成因分析&lt;/h2&gt;&lt;p&gt;   当然我知道我跑的是真机并非什么虚拟机或沙箱，那么问题就来了，为什么好好的在WIN10下跑的系统会认为我在虚拟机下呢？&lt;/p&gt;
+&lt;p&gt;   实际上是VMP对虚拟机检测代码的不完善导致的，由于VMP出现在早期，俄国佬可能希望找到一种万金油的解决方法，所以并没有细致的去总结每个虚拟机和沙箱的特征（&lt;strong&gt;此处发现他检测沙箱居然是检测进程是否存在SBIEDLL.DLL文件&lt;/strong&gt;），从而造成这种很乌龙的问题。&lt;/p&gt;
+&lt;p&gt;   目前已知可能出现该问题的VMP版本号我不清楚，我只是测试了2.13版本，3.0BETA并未测试，欢迎指正。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;   告知用户存在异常，请删除系统内的Hyper-v即可，很多WIN10安装包默认开启该子系统。&lt;/p&gt;
+&lt;p&gt;   删除方法请自行GOOGLE。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;VmProtect某些版本与Hyper-V冲突&quot;&gt;&lt;a href=&quot;#VmProtect某些版本与Hyper-V冲突&quot; class=&quot;headerlink&quot; title=&quot;VmProtect某些版本与Hyper-V冲突&quot;&gt;&lt;/a&gt;VmProtect某些版本与Hyp
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Boost自动编译程序 for Python</title>

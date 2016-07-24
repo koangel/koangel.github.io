@@ -181,6 +181,77 @@
 
       <div class="body-wrap">
   
+    <article id="post-VmProtect某些版本与Hyper-V冲突" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/24/VmProtect某些版本与Hyper-V冲突/" class="article-date">
+  	<time datetime="2016-07-24T15:20:30.000Z" itemprop="datePublished">2016-07-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/24/VmProtect某些版本与Hyper-V冲突/">VmProtect某些版本与Hyper-V冲突</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="VmProtect某些版本与Hyper-V冲突"><a href="#VmProtect某些版本与Hyper-V冲突" class="headerlink" title="VmProtect某些版本与Hyper-V冲突"></a>VmProtect某些版本与Hyper-V冲突</h1><hr>
+<h2 id="起因病症"><a href="#起因病症" class="headerlink" title="起因病症"></a>起因病症</h2><blockquote>
+<p>今天在调试一个用<code>VMProtect</code>加过壳的程序，发现这个壳非常神奇，怎么挂调试器都无法启动，可前几天我明明调试过他，这个太神奇。</p>
+</blockquote>
+<p>   总结基本病症为：  </p>
+<ul>
+<li><code>NtDll.dll</code>中函数<code>NtWaitForWorkViaWorkerFactory</code></li>
+<li><code>VMProtect</code>入口压缩代码以及调试器检测代码未跑完 </li>
+<li><p>发现函数跑在虚拟机或沙箱检测部分时自动异常 </p>
+<p>所以立刻总结是VMP认为我在虚拟机或沙箱中运行导致的异常，而并未其他的加载问题之类的。</p>
+</li>
+</ul>
+<hr>
+<h2 id="成因分析"><a href="#成因分析" class="headerlink" title="成因分析"></a>成因分析</h2><p>   当然我知道我跑的是真机并非什么虚拟机或沙箱，那么问题就来了，为什么好好的在WIN10下跑的系统会认为我在虚拟机下呢？</p>
+<p>   实际上是VMP对虚拟机检测代码的不完善导致的，由于VMP出现在早期，俄国佬可能希望找到一种万金油的解决方法，所以并没有细致的去总结每个虚拟机和沙箱的特征（<strong>此处发现他检测沙箱居然是检测进程是否存在SBIEDLL.DLL文件</strong>），从而造成这种很乌龙的问题。</p>
+<p>   目前已知可能出现该问题的VMP版本号我不清楚，我只是测试了2.13版本，3.0BETA并未测试，欢迎指正。</p>
+<hr>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>   告知用户存在异常，请删除系统内的Hyper-v即可，很多WIN10安装包默认开启该子系统。</p>
+<p>   删除方法请自行GOOGLE。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Boost自动编译程序-for-Python" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
