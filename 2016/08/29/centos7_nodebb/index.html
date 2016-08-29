@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>【记录】CentOS7安装NodeBB | 游戏日常点滴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="NodeBB介绍：
+NodeBB 是一个更好的论坛平台，专门为现代网络打造。它是免费的，易于使用。 NodeBB 论坛软件是基于 Node.js 开发，支持 Redis 或 MongoDB 的数据库。它利用 Web Socket 实现即时交互和实时通知。NodeBB 向下兼容到 IE8 ，有许多现代化的开箱即用功能：如社交网络集成和流媒体的讨论。
+
+
+NodeBB安装：1、首先安装NodeJs环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【记录】CentOS7安装NodeBB">
+<meta property="og:url" content="http://koangel.github.io/2016/08/29/centos7_nodebb/index.html">
+<meta property="og:site_name" content="游戏日常点滴">
+<meta property="og:description" content="NodeBB介绍：
+NodeBB 是一个更好的论坛平台，专门为现代网络打造。它是免费的，易于使用。 NodeBB 论坛软件是基于 Node.js 开发，支持 Redis 或 MongoDB 的数据库。它利用 Web Socket 实现即时交互和实时通知。NodeBB 向下兼容到 IE8 ，有许多现代化的开箱即用功能：如社交网络集成和流媒体的讨论。
+
+
+NodeBB安装：1、首先安装NodeJs环境">
+<meta property="og:image" content="http://img1.tuicool.com/f2yqYj.jpg!web">
+<meta property="og:updated_time" content="2016-08-29T11:59:16.268Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【记录】CentOS7安装NodeBB">
+<meta name="twitter:description" content="NodeBB介绍：
+NodeBB 是一个更好的论坛平台，专门为现代网络打造。它是免费的，易于使用。 NodeBB 论坛软件是基于 Node.js 开发，支持 Redis 或 MongoDB 的数据库。它利用 Web Socket 实现即时交互和实时通知。NodeBB 向下兼容到 IE8 ，有许多现代化的开箱即用功能：如社交网络集成和流媒体的讨论。
+
+
+NodeBB安装：1、首先安装NodeJs环境">
+<meta name="twitter:image" content="http://img1.tuicool.com/f2yqYj.jpg!web">
+  
+    <link rel="alternative" href="/atom.xml" title="游戏日常点滴" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/userAvatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">K.O Angel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">从事十多年游戏研发，目前担任制作人以及CTO</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">K.O Angel</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/userAvatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">K.O Angel</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-centos7_nodebb" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/29/centos7_nodebb/" class="article-date">
+  	<time datetime="2016-08-29T11:59:00.000Z" itemprop="datePublished">2016-08-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【记录】CentOS7安装NodeBB
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NodeBB介绍："><a href="#NodeBB介绍：" class="headerlink" title="NodeBB介绍："></a>NodeBB介绍：</h1><blockquote>
+<p>NodeBB 是一个更好的论坛平台，专门为现代网络打造。它是免费的，易于使用。 NodeBB 论坛软件是基于 Node.js 开发，支持 Redis 或 MongoDB 的数据库。它利用 Web Socket 实现即时交互和实时通知。NodeBB 向下兼容到 IE8 ，有许多现代化的开箱即用功能：如社交网络集成和流媒体的讨论。</p>
+</blockquote>
+<p><img src="http://img1.tuicool.com/f2yqYj.jpg!web" alt=""></p>
+<h1 id="NodeBB安装："><a href="#NodeBB安装：" class="headerlink" title="NodeBB安装："></a>NodeBB安装：</h1><h2 id="1、首先安装NodeJs环境"><a href="#1、首先安装NodeJs环境" class="headerlink" title="1、首先安装NodeJs环境"></a>1、首先安装NodeJs环境</h2><blockquote>
+<p>Yum安装大法只适用于较新系统，如果使用比较老的NodeJs版本有可能导致NodeBB无法启动。</p>
+</blockquote>
+<p>  执行命令：<code>[root@localhost ~]# yum install nodejs npm</code></p>
+<p>  验证安装：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">  [root@localhost ~]# npm</div><div class="line"></div><div class="line">Usage: npm &lt;command&gt;</div><div class="line"></div><div class="line">where &lt;command&gt; is one of:</div><div class="line">    add-user, adduser, apihelp, author, bin, bugs, c, cache,</div><div class="line">    completion, config, ddp, dedupe, deprecate, docs, edit,</div><div class="line">    explore, faq, find, find-dupes, get, help, help-search,</div><div class="line">    home, i, info, init, install, isntall, issues, la, link,</div><div class="line">    list, ll, ln, login, ls, outdated, owner, pack, prefix,</div><div class="line">    prune, publish, r, rb, rebuild, remove, restart, rm, root,</div><div class="line">    run-script, s, se, search, set, show, shrinkwrap, star,</div><div class="line">    stars, start, stop, submodule, tag, test, tst, un,</div><div class="line">    uninstall, unlink, unpublish, unstar, up, update, version,</div><div class="line">    view, whoami</div><div class="line"></div><div class="line">npm &lt;cmd&gt; -h     quick help on &lt;cmd&gt;</div><div class="line">npm -l           display full usage info</div><div class="line">npm faq          commonly asked questions</div><div class="line">npm help &lt;term&gt;  search for help on &lt;term&gt;</div><div class="line">npm help npm     involved overview</div><div class="line"></div><div class="line">Specify configs in the ini-formatted file:</div><div class="line">    /root/.npmrc</div><div class="line">or on the command line via: npm &lt;command&gt; --key value</div><div class="line">Config info can be viewed via: npm help config</div><div class="line"></div><div class="line">npm@1.3.6 /usr/lib/node_modules/npm</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此处需要特别注意，如果NodeJs版本太老可能会出现各种问题，而无法使用，建议使用LTS版本4.5以及以上版本的NODEJS，具体区别请看官网。</p>
+<p>LTS代表社区维护版本，可以用于生产或测试环境的稳定版本，其中分4、6，2个版本，目前推荐使用为4.5版本，奇数前缀如5.X版本为测试版本或实验性版本，不建议用于生产环境，但可以用于测试环境。<br>例如本文安装的是0.10.46 yum版本，存在一个无法启动的问题，NPM版本也有点老。<br>报错：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[outdated] mongodb installed v2.1.22-alpha4, package.json requires ~2.1.3</div><div class="line">29/8 16:48 [2382] - [33mwarn[39m: One or more of NodeBB&apos;s dependent packages are out-of-date. Please run the following command to update them:</div><div class="line">29/8 16:48 [2382] - [33mwarn[39m: ./nodebb upgrade</div><div class="line">[cluster] Child Process (2382) has exited (code: 0, signal: null)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>NODEBB无法启动，原因是依赖的MongoDB驱动为2.1.22实际上需求为2.1.3所以无法启动导致。</p>
+</blockquote>
+<h3 id="附上一个NodeJs-LTS-4-5-0安装方法："><a href="#附上一个NodeJs-LTS-4-5-0安装方法：" class="headerlink" title="附上一个NodeJs LTS 4.5.0安装方法："></a>附上一个NodeJs LTS 4.5.0安装方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# wget https://nodejs.org/dist/v4.5.0/node-v4.5.0.tar.gz</div><div class="line">[root@localhost ~]# tar -xvf node-v4.5.0.tar.gz </div><div class="line">[root@localhost ~]# cd node-v4.5.0/</div><div class="line">[root@localhost ~]# ./configure</div><div class="line">[root@localhost ~]# make</div><div class="line">[root@localhost ~]# make install</div></pre></td></tr></table></figure>
+<h2 id="2、-安装数据库："><a href="#2、-安装数据库：" class="headerlink" title="2、 安装数据库："></a>2、 安装数据库：</h2><ul>
+<li><p>安装Redis数据库：</p>
+<p>执行语句：<code>[root@localhost ~]# yum install redis</code></p>
+<p>安装完毕以后，试着启动一下，其余按照REDIS方式走就行了，这里默认是2.8版本<br>　不开心可以用源码安装噢</p>
+</li>
+</ul>
+<p>　NODEBB可以采用MongoDB，由于我是本地虚拟机，我内存不足，而且我之前工作与MongoDB有关，所以我这里就改为使用MongoDB了。</p>
+<ul>
+<li><p>安装MONGODB数据库：</p>
+<p>Yum安装MONGODB略微繁琐如下：</p>
+<p>首先创建文件 <code>/etc/yum.repos.d/mongodb-org-3.2.repo</code> ，然后 打开文件，将以下内容粘贴进入该文件并保存。</p>
+</li>
+</ul>
+<blockquote>
+<p>此处可以使用WINSCP搞定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[mongodb-org-3.2]</div><div class="line">name=MongoDB Repository</div><div class="line">baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/</div><div class="line">gpgcheck=1</div><div class="line">enabled=1</div><div class="line">gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>然后执行语句:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install -y mongodb-org</div><div class="line">[root@localhost ~]# sudo service mongod start</div><div class="line">　　 Starting mongod (via systemctl): [ 确定 ]</div></pre></td></tr></table></figure></p>
+<p>此处MONGODB安装好了。</p>
+<h2 id="3、-安装依赖库："><a href="#3、-安装依赖库：" class="headerlink" title="3、 安装依赖库："></a>3、 安装依赖库：</h2><pre><code>执行语句：`[root@localhost ~]# yum install ImageMagick ImageMagick-devel`
+
+测试是否安装成功：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# convert -version</div><div class="line">Version: ImageMagick 6.7.8-9 2016-06-16 Q16 http://www.imagemagick.org</div><div class="line">Copyright: Copyright (C) 1999-2012 ImageMagick Studio LLC</div><div class="line">Features: OpenMP</div></pre></td></tr></table></figure>
+<h2 id="4、安装NodeBB："><a href="#4、安装NodeBB：" class="headerlink" title="4、安装NodeBB："></a>4、安装NodeBB：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git://github.com/designcreateplay/NodeBB.git nodebb</div></pre></td></tr></table></figure>
+<p>然后用NodeJs安装它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost nodebb]# ./nodebb setup</div></pre></td></tr></table></figure></p>
+<p>安装数据库权限:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mongo</div><div class="line">MongoDB shell version: 3.2.9</div><div class="line">connecting to: test</div><div class="line">Server has startup warnings: </div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] </div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is &apos;always&apos;.</div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] **        We suggest setting it to &apos;never&apos;</div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] </div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is &apos;always&apos;.</div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] **        We suggest setting it to &apos;never&apos;</div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] </div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] ** WARNING: soft rlimits too low. rlimits set to 4096 processes, 65536 files. Number of processes should be at least 32768 : 0.5 times number of files.</div><div class="line">2016-08-29T15:52:00.580+0800 I CONTROL  [initandlisten] </div><div class="line">&gt; use nodebb;</div><div class="line">switched to db nodebb</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>数据安装完成，如果这个时候你想用密码或账户登陆，那么执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">use nodebb;</div><div class="line">db.createUser( &#123; user: &quot;root&quot;, pwd: &quot;123456789&quot;, roles: [ &quot;readWrite&quot; ] &#125; )</div></pre></td></tr></table></figure></p>
+<p>启动NODEBB:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost nodebb]# ./nodebb start</div></pre></td></tr></table></figure></p>
+<p>当大致安装完毕后，可以采用Ngix做反向代理，从而隐藏掉4567这样的端口。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/20/opencc-cpp-local/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用OPENCC库进行简繁转换（C++代码）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="centos7_nodebb" data-title="【记录】CentOS7安装NodeBB" data-url="http://koangel.github.io/2016/08/29/centos7_nodebb/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 K.O Angel
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
