@@ -181,6 +181,63 @@
 
       <div class="body-wrap">
   
+    <article id="post-gopsutil-get-system" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/04/gopsutil-get-system/" class="article-date">
+  	<time datetime="2017-05-04T13:28:00.000Z" itemprop="datePublished">2017-05-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/04/gopsutil-get-system/">GO语言使用gopsutil包进行机器信息采集</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GO语言使用gopsutil包进行机器信息采集"><a href="#GO语言使用gopsutil包进行机器信息采集" class="headerlink" title="GO语言使用gopsutil包进行机器信息采集"></a>GO语言使用gopsutil包进行机器信息采集</h2><p>GO语言本身拥有极强的性能，非常适合做一些后端的数据采集管理以及运维系统。</p>
+<p>其中会面临对当前系统信息的采集，我在这里使用的是GO的工具包 gopsutil</p>
+<p>贴出一套测试代码，抛砖引玉：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"time"</span></div><div class="line"></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/cpu"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/disk"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/host"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/mem"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/net"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">collet</span><span class="params">()</span></span> &#123;</div><div class="line">    v, _ := mem.VirtualMemory()</div><div class="line">    c, _ := cpu.Info()</div><div class="line">    cc, _ := cpu.Percent(time.Second, <span class="literal">false</span>)</div><div class="line">    d, _ := disk.Usage(<span class="string">"/"</span>)</div><div class="line">    n, _ := host.Info()</div><div class="line">    nv, _ := net.IOCounters(<span class="literal">true</span>)</div><div class="line">    boottime, _ := host.BootTime()</div><div class="line">    btime := time.Unix(<span class="keyword">int64</span>(boottime), <span class="number">0</span>).Format(<span class="string">"2006-01-02 15:04:05"</span>)</div><div class="line"></div><div class="line">    fmt.Printf(<span class="string">"        Mem       : %v MB  Free: %v MB Used:%v Usage:%f%%\n"</span>, v.Total/<span class="number">1024</span>/<span class="number">1024</span>, v.Available/<span class="number">1024</span>/<span class="number">1024</span>, v.Used/<span class="number">1024</span>/<span class="number">1024</span>, v.UsedPercent)</div><div class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(c) &gt; <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">for</span> _, sub_cpu := <span class="keyword">range</span> c &#123;</div><div class="line">            modelname := sub_cpu.ModelName</div><div class="line">            cores := sub_cpu.Cores</div><div class="line">            fmt.Printf(<span class="string">"        CPU       : %v   %v cores \n"</span>, modelname, cores)</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        sub_cpu := c[<span class="number">0</span>]</div><div class="line">        modelname := sub_cpu.ModelName</div><div class="line">        cores := sub_cpu.Cores</div><div class="line">        fmt.Printf(<span class="string">"        CPU       : %v   %v cores \n"</span>, modelname, cores)</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    fmt.Printf(<span class="string">"        Network: %v bytes / %v bytes\n"</span>, nv[<span class="number">0</span>].BytesRecv, nv[<span class="number">0</span>].BytesSent)</div><div class="line">    fmt.Printf(<span class="string">"        SystemBoot:%v\n"</span>, btime)</div><div class="line">    fmt.Printf(<span class="string">"        CPU Used    : used %f%% \n"</span>, cc[<span class="number">0</span>])</div><div class="line">    fmt.Printf(<span class="string">"        HD        : %v GB  Free: %v GB Usage:%f%%\n"</span>, d.Total/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>, d.Free/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>, d.UsedPercent)</div><div class="line">    fmt.Printf(<span class="string">"        OS        : %v(%v)   %v  \n"</span>, n.Platform, n.PlatformFamily, n.PlatformVersion)</div><div class="line">    fmt.Printf(<span class="string">"        Hostname  : %v  \n"</span>, n.Hostname)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码中还包含CPU使用率采集，可用内存采集以及网络数据包收发采集，目前网络数据采集尚不稳定。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-centos7_nodebb" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -606,7 +663,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 K.O Angel
+    		&copy; 2017 K.O Angel
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

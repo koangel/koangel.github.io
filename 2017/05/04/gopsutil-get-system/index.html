@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>GO语言使用gopsutil包进行机器信息采集 | 游戏日常点滴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="GO语言使用gopsutil包进行机器信息采集GO语言本身拥有极强的性能，非常适合做一些后端的数据采集管理以及运维系统。
+其中会面临对当前系统信息的采集，我在这里使用的是GO的工具包 gopsutil
+贴出一套测试代码，抛砖引玉：
+123456789101112131415161718192021222324252627282930313233343536373839404142import (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO语言使用gopsutil包进行机器信息采集">
+<meta property="og:url" content="http://koangel.github.io/2017/05/04/gopsutil-get-system/index.html">
+<meta property="og:site_name" content="游戏日常点滴">
+<meta property="og:description" content="GO语言使用gopsutil包进行机器信息采集GO语言本身拥有极强的性能，非常适合做一些后端的数据采集管理以及运维系统。
+其中会面临对当前系统信息的采集，我在这里使用的是GO的工具包 gopsutil
+贴出一套测试代码，抛砖引玉：
+123456789101112131415161718192021222324252627282930313233343536373839404142import (">
+<meta property="og:updated_time" content="2017-05-04T13:31:12.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GO语言使用gopsutil包进行机器信息采集">
+<meta name="twitter:description" content="GO语言使用gopsutil包进行机器信息采集GO语言本身拥有极强的性能，非常适合做一些后端的数据采集管理以及运维系统。
+其中会面临对当前系统信息的采集，我在这里使用的是GO的工具包 gopsutil
+贴出一套测试代码，抛砖引玉：
+123456789101112131415161718192021222324252627282930313233343536373839404142import (">
+  
+    <link rel="alternative" href="/atom.xml" title="游戏日常点滴" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/userAvatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">K.O Angel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">从事十多年游戏研发，目前担任制作人以及CTO</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">K.O Angel</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/userAvatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">K.O Angel</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">写自己的游戏让别人玩去吧</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/koangel" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/koangel" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="mail" target="_blank" href="/jackliu100@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-gopsutil-get-system" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/04/gopsutil-get-system/" class="article-date">
+  	<time datetime="2017-05-04T13:28:00.000Z" itemprop="datePublished">2017-05-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GO语言使用gopsutil包进行机器信息采集
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GO语言使用gopsutil包进行机器信息采集"><a href="#GO语言使用gopsutil包进行机器信息采集" class="headerlink" title="GO语言使用gopsutil包进行机器信息采集"></a>GO语言使用gopsutil包进行机器信息采集</h2><p>GO语言本身拥有极强的性能，非常适合做一些后端的数据采集管理以及运维系统。</p>
+<p>其中会面临对当前系统信息的采集，我在这里使用的是GO的工具包 gopsutil</p>
+<p>贴出一套测试代码，抛砖引玉：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"time"</span></div><div class="line"></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/cpu"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/disk"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/host"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/mem"</span></div><div class="line">    <span class="string">"github.com/shirou/gopsutil/net"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">collet</span><span class="params">()</span></span> &#123;</div><div class="line">    v, _ := mem.VirtualMemory()</div><div class="line">    c, _ := cpu.Info()</div><div class="line">    cc, _ := cpu.Percent(time.Second, <span class="literal">false</span>)</div><div class="line">    d, _ := disk.Usage(<span class="string">"/"</span>)</div><div class="line">    n, _ := host.Info()</div><div class="line">    nv, _ := net.IOCounters(<span class="literal">true</span>)</div><div class="line">    boottime, _ := host.BootTime()</div><div class="line">    btime := time.Unix(<span class="keyword">int64</span>(boottime), <span class="number">0</span>).Format(<span class="string">"2006-01-02 15:04:05"</span>)</div><div class="line"></div><div class="line">    fmt.Printf(<span class="string">"        Mem       : %v MB  Free: %v MB Used:%v Usage:%f%%\n"</span>, v.Total/<span class="number">1024</span>/<span class="number">1024</span>, v.Available/<span class="number">1024</span>/<span class="number">1024</span>, v.Used/<span class="number">1024</span>/<span class="number">1024</span>, v.UsedPercent)</div><div class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(c) &gt; <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">for</span> _, sub_cpu := <span class="keyword">range</span> c &#123;</div><div class="line">            modelname := sub_cpu.ModelName</div><div class="line">            cores := sub_cpu.Cores</div><div class="line">            fmt.Printf(<span class="string">"        CPU       : %v   %v cores \n"</span>, modelname, cores)</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        sub_cpu := c[<span class="number">0</span>]</div><div class="line">        modelname := sub_cpu.ModelName</div><div class="line">        cores := sub_cpu.Cores</div><div class="line">        fmt.Printf(<span class="string">"        CPU       : %v   %v cores \n"</span>, modelname, cores)</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    fmt.Printf(<span class="string">"        Network: %v bytes / %v bytes\n"</span>, nv[<span class="number">0</span>].BytesRecv, nv[<span class="number">0</span>].BytesSent)</div><div class="line">    fmt.Printf(<span class="string">"        SystemBoot:%v\n"</span>, btime)</div><div class="line">    fmt.Printf(<span class="string">"        CPU Used    : used %f%% \n"</span>, cc[<span class="number">0</span>])</div><div class="line">    fmt.Printf(<span class="string">"        HD        : %v GB  Free: %v GB Usage:%f%%\n"</span>, d.Total/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>, d.Free/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>, d.UsedPercent)</div><div class="line">    fmt.Printf(<span class="string">"        OS        : %v(%v)   %v  \n"</span>, n.Platform, n.PlatformFamily, n.PlatformVersion)</div><div class="line">    fmt.Printf(<span class="string">"        Hostname  : %v  \n"</span>, n.Hostname)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码中还包含CPU使用率采集，可用内存采集以及网络数据包收发采集，目前网络数据采集尚不稳定。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/29/centos7_nodebb/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【记录】CentOS7安装NodeBB</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="gopsutil-get-system" data-title="GO语言使用gopsutil包进行机器信息采集" data-url="http://koangel.github.io/2017/05/04/gopsutil-get-system/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 K.O Angel
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
